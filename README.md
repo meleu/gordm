@@ -8,7 +8,7 @@ a project for a CLI written in Go. The focus is more on how to organize
 
 - [x] generate random numbers (mimic `echo $RANDOM`)
 - [x] add integration tests
-- [ ] GitHub Action to run the tests
+- [x] GitHub Action to run the tests
 - [ ] specify the min and/or max via arguments
   - e.g.: `gordm -min 0 -max 6`
 - [ ] get random integer from random.org
