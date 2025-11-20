@@ -16,11 +16,13 @@ const (
 type parsedArgs struct {
 	min int
 	max int
+	web bool
 }
 
 func parseArgs() parsedArgs {
 	min := flag.Int("min", defaultMin, "Minimum number to be generated")
 	max := flag.Int("max", defaultMax, "Maximum number to be generated")
+	web := flag.Bool("web", false, "Get the random number from random.org")
 	flag.Parse()
 
 	validateMinMax(*min, *max)
@@ -28,12 +30,21 @@ func parseArgs() parsedArgs {
 	return parsedArgs{
 		min: *min,
 		max: *max,
+		web: *web,
 	}
 }
 
 func main() {
+	var number int
 	args := parseArgs()
-	fmt.Println(gordm.GenerateRandomInt(args.min, args.max))
+
+	if args.web {
+		number = gordm.GetRandomIntFromWeb(args.min, args.max)
+	} else {
+		number = gordm.GenerateRandomInt(args.min, args.max)
+	}
+
+	fmt.Println(number)
 }
 
 func validateMinMax(min, max int) {

@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"runtime"
 	"strconv"
 	"strings"
@@ -71,6 +72,23 @@ func TestGordmCLI(t *testing.T) {
 		got := refuteRunCmd(t, cmdPath, "--min", "999", "--max", "0")
 		if !strings.HasPrefix(got, "invalid input: ") {
 			t.Errorf("expected output to start with \"invalid input: \", got %q", got)
+		}
+	})
+
+	t.Run("help message shows '-web' option", func(t *testing.T) {
+		got := assertRunCmd(t, cmdPath, "--help")
+		pattern := ` -web[\s\S]*from random.org`
+		matched, err := regexp.MatchString(pattern, got)
+		if err != nil {
+			// error in the Regular Expression per se
+			t.Errorf("error matching regex: %v", pattern)
+		}
+		if !matched {
+			// output didn't match the pattern in the RegExp
+			t.Errorf(
+				"the output didn't match the regex.\nregex: %v\noutput:\n%v",
+				pattern, got,
+			)
 		}
 	})
 }

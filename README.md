@@ -13,7 +13,7 @@ a project for a CLI written in Go. The focus is more on how to organize
   - [x] e.g.: `gordm -min 0 -max 6`
   - [x] validate that min < max
 - [x] get random integer from random.org
-  - [ ] `gordm -web`
+  - [x] `gordm -web`
 - [ ] subcommands: `gordm number` (make it the default when no subcommand is given)
 - [ ] `gordm password` to generate a random password
 - [ ] `gordm password -size NUM` to define the amount of characters
